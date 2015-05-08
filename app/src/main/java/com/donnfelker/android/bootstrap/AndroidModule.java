@@ -35,7 +35,7 @@ public class AndroidModule {
     }
 
     @Provides
-    PackageInfo providePackageInfo(@ForApplication Context context) {
+    PackageInfo providePackageInfo(@ForApplication final Context context) {
         try {
             return context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
         } catch (PackageManager.NameNotFoundException e) {
@@ -44,18 +44,13 @@ public class AndroidModule {
     }
 
     @Provides
-    TelephonyManager provideTelephonyManager(@ForApplication Context context) {
+    TelephonyManager provideTelephonyManager(@ForApplication final Context context) {
         return getSystemService(context, Context.TELEPHONY_SERVICE);
-    }
-
-    @SuppressWarnings("unchecked")
-    public <T> T getSystemService(@ForApplication Context context, String serviceConstant) {
-        return (T) context.getSystemService(serviceConstant);
     }
 
     @Provides
     InputMethodManager provideInputMethodManager(@ForApplication final Context context) {
-        return (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        return getSystemService(context, Context.INPUT_METHOD_SERVICE);
     }
 
     @Provides
@@ -75,7 +70,11 @@ public class AndroidModule {
 
     @Provides
     NotificationManager provideNotificationManager(@ForApplication final Context context) {
-        return (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        return getSystemService(context, Context.NOTIFICATION_SERVICE);
     }
 
+    @SuppressWarnings("unchecked")
+    private <T> T getSystemService(Context context, String serviceConstant) {
+        return (T) context.getSystemService(serviceConstant);
+    }
 }
