@@ -1,17 +1,20 @@
 package com.donnfelker.android.bootstrap.core;
 
 
+import javax.inject.Inject;
+
+import retrofit.RequestInterceptor;
+
 import static com.donnfelker.android.bootstrap.core.Constants.Http.HEADER_PARSE_APP_ID;
 import static com.donnfelker.android.bootstrap.core.Constants.Http.HEADER_PARSE_REST_API_KEY;
 import static com.donnfelker.android.bootstrap.core.Constants.Http.PARSE_APP_ID;
 import static com.donnfelker.android.bootstrap.core.Constants.Http.PARSE_REST_API_KEY;
 
-import retrofit.RequestInterceptor;
-
 public class RestAdapterRequestInterceptor implements RequestInterceptor {
 
-    private UserAgentProvider userAgentProvider;
+    private final UserAgentProvider userAgentProvider;
 
+    @Inject
     public RestAdapterRequestInterceptor(UserAgentProvider userAgentProvider) {
         this.userAgentProvider = userAgentProvider;
     }

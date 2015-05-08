@@ -6,24 +6,19 @@ import android.app.Activity;
 
 import com.donnfelker.android.bootstrap.authenticator.ApiKeyProvider;
 import com.donnfelker.android.bootstrap.core.BootstrapService;
-import com.donnfelker.android.bootstrap.core.UserAgentProvider;
 
 import java.io.IOException;
-
-import javax.inject.Inject;
-
-import retrofit.RestAdapter;
 
 /**
  * Provider for a {@link com.donnfelker.android.bootstrap.core.BootstrapService} instance
  */
 public class BootstrapServiceProviderImpl implements BootstrapServiceProvider {
 
-    private RestAdapter restAdapter;
-    private ApiKeyProvider keyProvider;
+    private final BootstrapService bootstrapService;
+    private final ApiKeyProvider keyProvider;
 
-    public BootstrapServiceProviderImpl(RestAdapter restAdapter, ApiKeyProvider keyProvider) {
-        this.restAdapter = restAdapter;
+    public BootstrapServiceProviderImpl(BootstrapService bootstrapService, ApiKeyProvider keyProvider) {
+        this.bootstrapService = bootstrapService;
         this.keyProvider = keyProvider;
     }
 
@@ -42,6 +37,6 @@ public class BootstrapServiceProviderImpl implements BootstrapServiceProvider {
         // The call to keyProvider.getAuthKey(...) is what initiates the login screen. Call that now.
         keyProvider.getAuthKey(activity);
 
-        return new BootstrapService(restAdapter);
+        return bootstrapService;
     }
 }

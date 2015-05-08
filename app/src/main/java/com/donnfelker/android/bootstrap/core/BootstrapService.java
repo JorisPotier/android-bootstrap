@@ -3,6 +3,8 @@ package com.donnfelker.android.bootstrap.core;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import retrofit.RestAdapter;
 
 /**
@@ -10,20 +12,14 @@ import retrofit.RestAdapter;
  */
 public class BootstrapService {
 
-    private RestAdapter restAdapter;
-
-    /**
-     * Create bootstrap service
-     * Default CTOR
-     */
-    public BootstrapService() {
-    }
+    private final RestAdapter restAdapter;
 
     /**
      * Create bootstrap service
      *
      * @param restAdapter The RestAdapter that allows HTTP Communication.
      */
+    @Inject
     public BootstrapService(RestAdapter restAdapter) {
         this.restAdapter = restAdapter;
     }

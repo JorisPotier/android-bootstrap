@@ -21,8 +21,9 @@ import static com.donnfelker.android.bootstrap.core.Constants.Auth.BOOTSTRAP_ACC
  */
 public class ApiKeyProvider {
 
-    private AccountManager accountManager;
+    private final AccountManager accountManager;
 
+    @Inject
     public ApiKeyProvider(AccountManager accountManager) {
         this.accountManager = accountManager;
     }

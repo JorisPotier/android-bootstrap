@@ -11,7 +11,6 @@ import com.donnfelker.android.bootstrap.core.Constants;
 import com.donnfelker.android.bootstrap.core.PostFromAnyThreadBus;
 import com.donnfelker.android.bootstrap.core.RestAdapterRequestInterceptor;
 import com.donnfelker.android.bootstrap.core.RestErrorHandler;
-import com.donnfelker.android.bootstrap.core.UserAgentProvider;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.squareup.otto.Bus;
@@ -30,8 +29,8 @@ import retrofit.converter.GsonConverter;
 @Module
 public class BootstrapModule {
 
-    @Singleton
     @Provides
+    @Singleton
     Bus provideOttoBus() {
         return new PostFromAnyThreadBus();
     }
@@ -43,18 +42,8 @@ public class BootstrapModule {
     }
 
     @Provides
-    BootstrapService provideBootstrapService(RestAdapter restAdapter) {
-        return new BootstrapService(restAdapter);
-    }
-
-    @Provides
-    BootstrapServiceProvider provideBootstrapServiceProvider(RestAdapter restAdapter, ApiKeyProvider apiKeyProvider) {
-        return new BootstrapServiceProviderImpl(restAdapter, apiKeyProvider);
-    }
-
-    @Provides
-    ApiKeyProvider provideApiKeyProvider(AccountManager accountManager) {
-        return new ApiKeyProvider(accountManager);
+    BootstrapServiceProvider provideBootstrapServiceProvider(BootstrapService bootstrapService, ApiKeyProvider apiKeyProvider) {
+        return new BootstrapServiceProviderImpl(bootstrapService, apiKeyProvider);
     }
 
     @Provides
@@ -72,16 +61,6 @@ public class BootstrapModule {
          *         .setFieldNamingPolicy(LOWER_CASE_WITH_UNDERSCORES).create();
          */
         return new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-    }
-
-    @Provides
-    RestErrorHandler provideRestErrorHandler(Bus bus) {
-        return new RestErrorHandler(bus);
-    }
-
-    @Provides
-    RestAdapterRequestInterceptor provideRestAdapterRequestInterceptor(UserAgentProvider userAgentProvider) {
-        return new RestAdapterRequestInterceptor(userAgentProvider);
     }
 
     @Provides
