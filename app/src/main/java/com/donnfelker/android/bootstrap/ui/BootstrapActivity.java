@@ -5,12 +5,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.donnfelker.android.bootstrap.Injector;
-
 import butterknife.ButterKnife;
 
 import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
 import static android.content.Intent.FLAG_ACTIVITY_SINGLE_TOP;
+import static com.donnfelker.android.bootstrap.BootstrapApplication.injector;
 
 /**
  * Base activity for a Bootstrap activity which does not use fragments.
@@ -21,7 +20,7 @@ public abstract class BootstrapActivity extends Activity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Injector.inject(this);
+        injector().inject(this);
     }
 
     @Override

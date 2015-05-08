@@ -3,12 +3,13 @@ package com.donnfelker.android.bootstrap.ui;
 import android.app.Activity;
 import android.os.Bundle;
 
-import com.donnfelker.android.bootstrap.Injector;
 import com.squareup.otto.Bus;
 
 import javax.inject.Inject;
 
 import butterknife.ButterKnife;
+
+import static com.donnfelker.android.bootstrap.BootstrapApplication.injector;
 
 
 /**
@@ -22,7 +23,7 @@ public class BootstrapFragmentActivity extends Activity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Injector.inject(this);
+        injector().inject(this);
     }
 
     @Override

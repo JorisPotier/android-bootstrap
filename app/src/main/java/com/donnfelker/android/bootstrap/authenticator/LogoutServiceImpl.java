@@ -8,8 +8,6 @@ import android.content.Context;
 import com.donnfelker.android.bootstrap.core.Constants;
 import com.donnfelker.android.bootstrap.util.SafeAsyncTask;
 
-import javax.inject.Inject;
-
 import timber.log.Timber;
 
 
@@ -21,7 +19,6 @@ public class LogoutServiceImpl implements LogoutService {
     protected final Context context;
     protected final AccountManager accountManager;
 
-    @Inject
     public LogoutServiceImpl(final Context context, final AccountManager accountManager) {
         this.context = context;
         this.accountManager = accountManager;

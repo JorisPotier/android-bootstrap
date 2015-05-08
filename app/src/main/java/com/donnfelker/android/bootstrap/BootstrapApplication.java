@@ -3,7 +3,9 @@
 package com.donnfelker.android.bootstrap;
 
 import android.app.Application;
+
 import com.crashlytics.android.Crashlytics;
+
 import io.fabric.sdk.android.Fabric;
 
 /**
@@ -12,6 +14,7 @@ import io.fabric.sdk.android.Fabric;
 public abstract class BootstrapApplication extends Application {
 
     private static BootstrapApplication instance;
+    private static Injector injector;
 
     /**
      * Create main application
@@ -30,7 +33,7 @@ public abstract class BootstrapApplication extends Application {
         instance = this;
 
         // Perform injection
-        Injector.init(this, Modules.list());
+        injector = DaggerInjector.create();
 
         onAfterInjection();
     }
@@ -41,5 +44,9 @@ public abstract class BootstrapApplication extends Application {
 
     public static BootstrapApplication getInstance() {
         return instance;
+    }
+
+    public static Injector injector() {
+        return injector;
     }
 }

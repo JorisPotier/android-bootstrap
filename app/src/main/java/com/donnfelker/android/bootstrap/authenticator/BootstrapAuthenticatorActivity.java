@@ -21,7 +21,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
-import com.donnfelker.android.bootstrap.Injector;
 import com.donnfelker.android.bootstrap.R;
 import com.donnfelker.android.bootstrap.R.id;
 import com.donnfelker.android.bootstrap.R.layout;
@@ -54,6 +53,7 @@ import static android.accounts.AccountManager.KEY_BOOLEAN_RESULT;
 import static android.view.KeyEvent.ACTION_DOWN;
 import static android.view.KeyEvent.KEYCODE_ENTER;
 import static android.view.inputmethod.EditorInfo.IME_ACTION_DONE;
+import static com.donnfelker.android.bootstrap.BootstrapApplication.injector;
 
 /**
  * Activity to authenticate the user against an API (example API on Parse.com)
@@ -123,7 +123,7 @@ public class BootstrapAuthenticatorActivity extends ActionBarAccountAuthenticato
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
 
-        Injector.inject(this);
+        injector().inject(this);
 
         accountManager = AccountManager.get(this);
 

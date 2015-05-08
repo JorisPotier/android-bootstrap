@@ -26,6 +26,8 @@ import javax.inject.Inject;
 import butterknife.ButterKnife;
 import timber.log.Timber;
 
+import static com.donnfelker.android.bootstrap.BootstrapApplication.injector;
+
 
 /**
  * Initial activity for the application.
@@ -51,6 +53,7 @@ public class MainActivity extends BootstrapFragmentActivity {
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 
         super.onCreate(savedInstanceState);
+        injector().inject(this);
 
         if(isTablet()) {
             setContentView(R.layout.main_activity_tablet);

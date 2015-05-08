@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.ListView;
 
 import com.donnfelker.android.bootstrap.BootstrapServiceProvider;
-import com.donnfelker.android.bootstrap.Injector;
 import com.donnfelker.android.bootstrap.R;
 import com.donnfelker.android.bootstrap.authenticator.LogoutService;
 import com.donnfelker.android.bootstrap.core.CheckIn;
@@ -21,6 +20,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import static com.donnfelker.android.bootstrap.BootstrapApplication.injector;
+
 public class CheckInsListFragment extends ItemListFragment<CheckIn> {
 
     @Inject protected BootstrapServiceProvider serviceProvider;
@@ -29,7 +30,7 @@ public class CheckInsListFragment extends ItemListFragment<CheckIn> {
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Injector.inject(this);
+        injector().inject(this);
     }
 
     @Override

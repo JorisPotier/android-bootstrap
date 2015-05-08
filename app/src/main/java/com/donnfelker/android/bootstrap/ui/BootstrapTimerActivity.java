@@ -21,16 +21,12 @@ import com.donnfelker.android.bootstrap.core.TimerTickEvent;
 import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
 
-import javax.inject.Inject;
-
 import butterknife.InjectView;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
 public class BootstrapTimerActivity extends BootstrapFragmentActivity implements View.OnClickListener {
-
-    @Inject Bus eventBus;
 
     @InjectView(R.id.chronometer) protected TextView chronometer;
     @InjectView(R.id.start) protected Button start;

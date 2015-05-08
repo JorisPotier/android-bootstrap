@@ -1,42 +1,57 @@
 package com.donnfelker.android.bootstrap;
 
-import dagger.ObjectGraph;
-import timber.log.Timber;
+import com.donnfelker.android.bootstrap.authenticator.BootstrapAuthenticatorActivity;
+import com.donnfelker.android.bootstrap.core.TimerService;
+import com.donnfelker.android.bootstrap.ui.BootstrapActivity;
+import com.donnfelker.android.bootstrap.ui.BootstrapFragmentActivity;
+import com.donnfelker.android.bootstrap.ui.CheckInsListFragment;
+import com.donnfelker.android.bootstrap.ui.MainActivity;
+import com.donnfelker.android.bootstrap.ui.NavigationDrawerFragment;
+import com.donnfelker.android.bootstrap.ui.NewsListFragment;
+import com.donnfelker.android.bootstrap.ui.UserListFragment;
 
-public final class Injector {
+import javax.inject.Singleton;
 
-    private static ObjectGraph objectGraph = null;
+import dagger.Component;
 
-    public static void init(final Object... modules) {
-
-        objectGraph = ObjectGraph.create(modules);
-
-        // Inject statics
-        objectGraph.injectStatics();
-
-    }
-
-    public static void init(final Object target, Object... modules) {
-        init(modules);
-        inject(target);
-    }
-
-    public static void inject(final Object target) {
-        objectGraph.inject(target);
-    }
-
-    public static void add(Object... objects) {
-        Timber.d("add()");
-        if (objectGraph == null) {
-            objectGraph = ObjectGraph.create(objects);
-        } else {
-            objectGraph = objectGraph.plus(objects);
+@Singleton
+@Component(
+        modules = {
+                AndroidModule.class,
+                BootstrapModule.class
         }
-        Timber.d("successfully added into objectgraph");
+)
+public interface Injector {
 
-    }
+    /***************************/
+    /** Activities injections **/
+    /***************************/
 
-    public static <T> T resolve(Class<T> type) {
-        return objectGraph.get(type);
-    }
+    void inject(BootstrapAuthenticatorActivity bootstrapAuthenticatorActivity);
+
+    void inject(BootstrapActivity bootstrapActivity);
+
+    void inject(BootstrapFragmentActivity bootstrapFragmentActivity);
+
+    void inject(MainActivity mainActivity);
+
+
+    /**************************/
+    /** Fragments injections **/
+    /**************************/
+
+    void inject(NewsListFragment newsListFragment);
+
+    void inject(NavigationDrawerFragment navigationDrawerFragment);
+
+    void inject(CheckInsListFragment checkInsListFragment);
+
+    void inject(UserListFragment userListFragment);
+
+
+    /*************************/
+    /** Services injections **/
+    /*************************/
+
+    void inject(TimerService timerService);
 }

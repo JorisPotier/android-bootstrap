@@ -55,6 +55,7 @@ public class BootstrapServiceTest {
      */
     @Before
     public void before() throws IOException {
+        // FIXME provide dependencies for UserAgentProvider
         service = new BootstrapService("foo", new UserAgentProvider()) {
             protected HttpRequest execute(HttpRequest request) throws IOException {
                 return BootstrapServiceTest.this.request;

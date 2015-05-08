@@ -5,12 +5,10 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.Loader;
 import android.os.Bundle;
-
 import android.view.View;
 import android.widget.ListView;
 
 import com.donnfelker.android.bootstrap.BootstrapServiceProvider;
-import com.donnfelker.android.bootstrap.Injector;
 import com.donnfelker.android.bootstrap.R;
 import com.donnfelker.android.bootstrap.authenticator.LogoutService;
 import com.donnfelker.android.bootstrap.core.News;
@@ -21,6 +19,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import static com.donnfelker.android.bootstrap.BootstrapApplication.injector;
 import static com.donnfelker.android.bootstrap.core.Constants.Extra.NEWS_ITEM;
 
 public class NewsListFragment extends ItemListFragment<News> {
@@ -31,7 +30,7 @@ public class NewsListFragment extends ItemListFragment<News> {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Injector.inject(this);
+        injector().inject(this);
     }
 
     @Override

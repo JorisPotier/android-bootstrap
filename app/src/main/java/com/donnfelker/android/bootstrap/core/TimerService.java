@@ -11,7 +11,6 @@ import android.os.Message;
 import android.os.SystemClock;
 import android.support.v4.app.NotificationCompat;
 
-import com.donnfelker.android.bootstrap.Injector;
 import com.donnfelker.android.bootstrap.R;
 import com.donnfelker.android.bootstrap.ui.BootstrapTimerActivity;
 import com.squareup.otto.Bus;
@@ -22,6 +21,7 @@ import javax.inject.Inject;
 
 import timber.log.Timber;
 
+import static com.donnfelker.android.bootstrap.BootstrapApplication.injector;
 import static com.donnfelker.android.bootstrap.core.Constants.Notification.TIMER_NOTIFICATION_ID;
 
 public class TimerService extends Service {
@@ -47,7 +47,7 @@ public class TimerService extends Service {
     public void onCreate() {
         super.onCreate();
 
-        Injector.inject(this);
+        injector().inject(this);
 
         // Register the bus so we can send notifications.
         eventBus.register(this);

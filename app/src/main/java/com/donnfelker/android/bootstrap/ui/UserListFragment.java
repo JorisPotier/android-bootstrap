@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.ListView;
 
 import com.donnfelker.android.bootstrap.BootstrapServiceProvider;
-import com.donnfelker.android.bootstrap.Injector;
 import com.donnfelker.android.bootstrap.R;
 import com.donnfelker.android.bootstrap.authenticator.LogoutService;
 import com.donnfelker.android.bootstrap.core.User;
@@ -20,6 +19,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import static com.donnfelker.android.bootstrap.BootstrapApplication.injector;
 import static com.donnfelker.android.bootstrap.core.Constants.Extra.USER;
 
 public class UserListFragment extends ItemListFragment<User> {
@@ -31,7 +31,7 @@ public class UserListFragment extends ItemListFragment<User> {
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Injector.inject(this);
+        injector().inject(this);
     }
 
     @Override

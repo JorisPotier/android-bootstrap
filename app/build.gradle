@@ -7,10 +7,12 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:1.1.0'
         classpath 'io.fabric.tools:gradle:1.+'
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.4'
     }
 }
 apply plugin: 'com.android.application'
 apply plugin: 'io.fabric'
+apply plugin: 'com.neenbedankt.android-apt'
 
 repositories {
     maven { url 'https://github.com/donnfelker/mvn-repo/raw/master/' }
@@ -23,8 +25,9 @@ dependencies {
     compile 'com.google.code.gson:gson:2.3'
 
     // Dependency Injection
-    compile 'com.squareup.dagger:dagger:1.2.2'
-    compile 'com.squareup.dagger:dagger-compiler:1.2.2'
+    compile 'com.google.dagger:dagger:2.0'
+    apt 'com.google.dagger:dagger-compiler:2.0'
+    provided 'javax.annotation:jsr250-api:1.0'
 
     // View Injection
     compile 'com.jakewharton:butterknife:6.0.0'
